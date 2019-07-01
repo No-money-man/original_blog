@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>DL'sメモ</title>
+  {% load static %}
+  <link href="{% static 'blogs/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>見つかりませんでした！</h1>
+<p>{{ request.build_absolute_uri }} は見つかりませんでした。</p>
+<a href="/">トップへ戻る</a>
+</body>
+
+</html>

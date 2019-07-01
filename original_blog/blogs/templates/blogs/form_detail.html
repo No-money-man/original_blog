@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/static/blogs/samne2'.png" size="32*32">
+  <title>管理画面</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'blogs/style.css' %}">
+  <link rel="stylesheet" href="{% static 'blogs/simplemde.min.css' %}">
+  <script src="{% static 'blogs/simplemde.min.js' %}"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+    },
+    CommonHTML: { matchFontHeight: false }
+  });
+  </script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body>
+  <div class="return">
+  <a href="{% url 'blogs:blog_list'　%}">戻る</a>
+</div>
+
+<!-- action:このフォームが投稿されたとき、すなわちsubmitボタンが押されたとき、blog_detail(=url.pyにて、name='blo_detail')に対してサーバにPOSTが送られる -->
+<form action="{% url 'blogs:form_detail' blog.id %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <script>
+    var simplemde = new SimpleMDE();
+  </script>
+  <button class="btn" type="submit">更新</button>
+</form>
+<form action="{% url 'blogs:form_delete' blog.id %}" method="POST">
+  {% csrf_token %}
+  <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+</form>
+</body>
+
+</html>

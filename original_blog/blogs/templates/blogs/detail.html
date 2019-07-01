@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" type="image/png" href="/static/blogs/samne2'.png" size="32*32">
+  <title>DL'sメモ</title>
+  <link href="{% static 'blogs/style.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{% static 'blogs/simplemde.min.css' %}">
+  <script src="{% static 'blogs/simplemde.min.js' %}"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+    },
+    CommonHTML: { matchFontHeight: false }
+  });
+  </script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body style="background-color: #1b2538;">
+  <div style="background-color: white;">
+    <div class="small_title">Dailylearnerのメモ</div> <!-- ブログタイトル -->
+    <h1 class="detail_title">{{ blog.title }}</h1> <!-- 記事タイトル -->
+    <div class="allspace">
+        <div class="detailtext">
+          <img class="samne" src="{{ blog.thumbnail.url }}"> <!-- サムネ挿入 -->
+          {{ blog.get_message_as_markdown | linebreaksbr }}]
+        </div>
+        <div class="returntop">
+          <a href="{% url 'blogs:home' %}">トップページに戻る</a>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

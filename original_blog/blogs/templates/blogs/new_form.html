@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>管理画面</title>
+  <link rel="icon" type="image/png" href="/static/blogs/samne2'.png" size="32*32">
+  <link rel="stylesheet" type="text/css" href="{% static 'blogs/style.css' %}">
+  <link rel="stylesheet" href="{% static 'blogs/simplemde.min.css' %}">
+  <script src="{% static 'blogs/simplemde.min.js' %}"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+    },
+    CommonHTML: { matchFontHeight: false }
+  });
+  </script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body>
+  <h1>書き込みフォーム</h1>
+  <form action="{% url 'blogs:new_form' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>{{ form.as_table }}</table>
+    <script>
+      var simplemde = new SimpleMDE();
+    </script>
+    <noscript></noscript>
+    <button class="btn" type="submit">保存</button>
+  </form>
+  <div class="return">
+    <a href="{% url 'blogs:blog_list' %}">戻る</a>
+  </div>
+</body>
+
+</html>

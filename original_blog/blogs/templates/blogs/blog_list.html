@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/static/blogs/samne2'.png" size="32*32">
+  <title>管理画面</title>
+  {% load static %}
+  <link href="{% static '.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{% static 'blogs/simplemde.min.css' %}">
+  <script src="{% static 'blogs/simplemde.min.js' %}"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+    },
+    CommonHTML: { matchFontHeight: false }
+  });
+  </script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body>
+  <div style="position: relative; left: 25%">
+    <h2><a href="{% url 'blogs:new_form' %}">新規投稿</a></h2>
+  </div>
+  {% for blog in blogs %}
+  <div style="border: 1px solid black; width: 60%;">
+    {{ blog.created_datetime }}
+    {% for image in image_list %}
+      <img src="{{ blog.thumbnail.url }}" width="100">
+    {% endfor %}
+    <a href="{% url 'blogs:form_detail' blog_id=blog.id %}"><h4>{{ blog.title }}</h4></a>
+    <div>{{ blog.get_message_as_markdown | truncatechars:50 | linebreaksbr}}</div>
+  </div>
+  {% endfor %}
+
+</body>
+
+</html>

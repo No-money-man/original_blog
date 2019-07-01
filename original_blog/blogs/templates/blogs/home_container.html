@@ -1,0 +1,24 @@
+{% extends 'templates/blogs/home.html' %}
+{% block content %}
+
+<h1>Dailylearnerのメモ</h1>
+<div class="introduce">
+  <p class="profile">PROFILE</p>
+  <p style="text-align: center;">よん</p>
+  {% load static %}
+  <div class="propicture"><img src="{% static "blogs/pro.png" %}"/></div>
+  <p class="text">Pythonと機械学習について学んでいる大学生。宇宙物理も勉強していく予定。</p>
+
+</div>
+<div class="mainpart">
+  <hr />
+  {% for blog in blogs %}
+  <div style="border: 3px solid green; box-shadow: 10px 10px 10px;">
+    {{ blog.created_datetime }}
+    <a href="{% url 'blogs:detail' blog_id=blog.id %}"><h2>{{ blog.title }}</h2></a>
+    <div>{{ blog.text | truncatechars:100 | linebreaksbr}}</div>
+  </div>
+  <hr />
+  {% endfor %}
+</div>
+{% endblock %}

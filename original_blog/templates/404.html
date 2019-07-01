@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>DLブログ</title>
+  {% load static %}
+  <link href="{% static 'blogs/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>見つかりませんでした！</h1>
+<p>{{ request_path }} は見つかりませんでした。</p>
+<a href="{% url 'blogs:home' %}">トップへ戻る</a>
+</body>
+
+</html>
